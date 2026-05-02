@@ -1,4 +1,11 @@
 @import "tailwindcss";
+
+@theme {
+  --color-darkbase: #0a0a0b;
+  --color-darkcard: #151517;
+  --color-amethyst: #a855f7;
+  --color-amethyst-hover: #c084fc;
+}
 :root {
   /* Canvas & Surfaces - Slate 900/800 aesthetic */
   --bg-void: #0F172A;
@@ -52,12 +59,9 @@
 }
 
 body {
-  background: var(--bg-void);
-  color: var(--text-primary);
+  @apply bg-darkbase text-gray-100 antialiased;
   font-family: var(--font-body);
   margin: 0;
-  -webkit-font-smoothing: antialiased;
-  background-image: none;
   min-height: 100vh;
 }
 
@@ -81,16 +85,10 @@ h1, h2, h3, .font-display {
 
 /* Card */
 .card {
-  background: var(--bg-surface);
-  border: none;
-  border-radius: var(--radius-xl);
-  box-shadow: var(--shadow-card);
-  padding: var(--space-6);
-  transition: all 0.3s ease;
+  @apply bg-darkcard rounded-md shadow-sm border border-white/5 p-6 transition-all duration-300;
 }
 .card:hover {
-  box-shadow: var(--shadow-card-hover);
-  transform: translateY(-2px);
+  @apply border-white/10 shadow-md;
 }
 
 /* Buttons */

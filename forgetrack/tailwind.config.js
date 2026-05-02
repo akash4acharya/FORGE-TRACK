@@ -7,6 +7,13 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        darkbase: '#0a0a0b',
+        darkcard: '#151517',
+        amethyst: {
+          DEFAULT: '#a855f7',
+          hover: '#c084fc',
+          light: 'rgba(168, 85, 247, 0.15)',
+        },
         void: 'var(--bg-void)',
         canvas: 'var(--bg-canvas)',
         surface: {
