@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { supabase } from '../../lib/supabase';
 import { Users, Calendar, BookOpen, Activity, TrendingUp, ChevronRight, TrendingDown, Clock, ArrowUpRight, ArrowDownRight, MoreHorizontal } from 'lucide-react';
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
@@ -16,6 +17,8 @@ const chartData = [
 export default function Dashboard() {
   const [sessions, setSessions] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [chartRange, setChartRange] = useState('This Week');
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadDashboard() {
@@ -124,7 +127,14 @@ export default function Dashboard() {
         <div className="bg-darkcard border border-white/5 rounded-xl p-6 shadow-sm lg:col-span-2">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-white">Session Activity Analytics</h2>
-            <select className="bg-darkbase border border-white/10 text-gray-300 text-sm rounded-md px-3 py-1.5 focus:outline-none focus:border-amethyst">
+            <select 
+              value={chartRange}
+              onChange={(e) => {
+                setChartRange(e.target.value);
+                alert(`Loading data for ${e.target.value}...`);
+              }}
+              className="bg-darkbase border border-white/10 text-gray-300 text-sm rounded-md px-3 py-1.5 focus:outline-none focus:border-amethyst"
+            >
               <option>This Week</option>
               <option>Last Week</option>
               <option>This Month</option>
@@ -157,7 +167,7 @@ export default function Dashboard() {
         <div className="bg-darkcard border border-white/5 rounded-xl p-6 shadow-sm">
           <div className="flex items-center justify-between mb-6">
             <h2 className="text-lg font-bold text-white">Mentee Progress by Phase</h2>
-            <button className="text-gray-400 hover:text-white transition-colors">
+            <button onClick={() => alert('Configuring Phase details...')} className="text-gray-400 hover:text-white transition-colors">
               <MoreHorizontal size={20} />
             </button>
           </div>
@@ -221,7 +231,7 @@ export default function Dashboard() {
       <div className="bg-darkcard border border-white/5 rounded-xl p-0 shadow-sm overflow-hidden">
         <div className="p-6 border-b border-white/5 flex items-center justify-between">
           <h2 className="text-lg font-bold text-white">Student Sessions</h2>
-          <button className="text-amethyst hover:text-white transition-colors text-sm font-medium">View All</button>
+          <button onClick={() => navigate('/history')} className="text-amethyst hover:text-white transition-colors text-sm font-medium">View All</button>
         </div>
 
         <div className="overflow-x-auto">
@@ -269,7 +279,7 @@ export default function Dashboard() {
                     )}
                   </td>
                   <td className="py-4 px-6 text-right">
-                    <button className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
+                    <button onClick={() => alert(`Managing session for Student ${i + 1}`)} className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
                       <MoreHorizontal size={18} />
                     </button>
                   </td>
@@ -302,7 +312,7 @@ export default function Dashboard() {
                     <span className="px-2.5 py-1 bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 rounded-md text-xs font-medium">Success</span>
                   </td>
                   <td className="py-4 px-6 text-right">
-                    <button className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
+                    <button onClick={() => alert(`Managing session for Student ${i}`)} className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
                       <MoreHorizontal size={18} />
                     </button>
                   </td>

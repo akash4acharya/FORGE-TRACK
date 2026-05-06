@@ -38,77 +38,77 @@ export default function Materials() {
 
   const getIcon = (type) => {
     switch(type) {
-      case 'pdf': return <FileText className="text-danger-fg" size={24} />;
-      case 'link': return <ExternalLink className="text-accent-glow" size={24} />;
-      default: return <FileText className="text-success-fg" size={24} />;
+      case 'pdf': return <FileText className="text-red-400" size={24} />;
+      case 'link': return <ExternalLink className="text-amethyst" size={24} />;
+      default: return <FileText className="text-emerald-400" size={24} />;
     }
   };
 
   if (loading) {
-    return <div className="flex items-center justify-center h-64 text-text-secondary">Loading materials...</div>;
+    return <div className="flex items-center justify-center h-64 text-gray-500">Loading materials...</div>;
   }
 
   return (
-    <div className="animate-fade-in space-y-8">
+    <div className="animate-fade-in space-y-6">
       <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
         <div>
-          <h1 className="text-3xl font-bold text-text-primary mb-2">Learning Materials</h1>
-          <p className="text-text-secondary font-medium">
+          <h1 className="text-xl font-bold text-white mb-1">Learning Materials</h1>
+          <p className="text-gray-400 font-medium text-sm">
             {role === 'mentor' ? 'Manage and share resources with your students.' : 'Access resources shared by your mentor.'}
           </p>
         </div>
 
         {role === 'mentor' && (
-          <button className="btn-primary whitespace-nowrap px-6 flex items-center gap-2">
-            <Plus size={18} />
+          <button className="bg-[#a855f7] hover:bg-[#c084fc] text-white font-medium px-4 py-2 rounded-md transition-colors flex items-center gap-2 text-sm shadow-sm">
+            <Plus size={16} />
             <span>Upload Material</span>
           </button>
         )}
       </div>
 
-      <div className="card p-0 overflow-hidden border-none shadow-2xl">
-        <div className="p-6 border-b border-border-subtle bg-surface/40 backdrop-blur-md flex flex-col sm:flex-row gap-5 items-center justify-between">
+      <div className="bg-[#151517] border border-zinc-800 rounded-xl overflow-hidden shadow-sm">
+        <div className="p-6 border-b border-zinc-800 flex flex-col sm:flex-row gap-5 items-center justify-between">
           <div className="relative w-full sm:max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
             <input 
               type="text" 
               placeholder="Search materials..." 
-              className="input pl-11 bg-surface-inset border-border-subtle focus:bg-surface transition-all"
+              className="w-full bg-[#0a0a0b] border border-zinc-800 focus:border-amethyst rounded-md py-2 pl-10 pr-4 text-sm text-white placeholder-gray-500 transition-colors outline-none"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="px-4 py-2 bg-surface-raised rounded-xl border border-border-subtle text-sm font-bold text-text-primary">
+          <div className="bg-[#0a0a0b] border border-zinc-800 text-zinc-300 rounded-full px-4 py-1 text-sm font-medium">
             {filteredMaterials.length} Resources
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6 bg-surface-inset/30">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
           {filteredMaterials.length === 0 ? (
-            <div className="col-span-full p-12 text-center">
-              <div className="text-text-tertiary mb-2"><Search size={48} className="mx-auto opacity-20" /></div>
-              <div className="text-text-secondary font-medium text-lg">No materials found.</div>
+             <div className="col-span-full p-12 text-center">
+              <div className="text-gray-600 mb-2 flex justify-center"><Search size={32} /></div>
+              <div className="text-gray-400 font-medium text-sm">No materials found.</div>
             </div>
           ) : (
             filteredMaterials.map((material, i) => (
-              <div key={material.id} className="card bg-surface hover:bg-surface-raised transition-all group flex flex-col h-full animate-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
+              <div key={material.id} className="bg-[#0a0a0b] border border-zinc-800 rounded-xl p-6 hover:border-[#a855f7]/50 transition-colors duration-200 group flex flex-col h-full animate-fade-in" style={{ animationDelay: `${i * 50}ms` }}>
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 rounded-xl bg-surface-inset flex items-center justify-center border border-border-subtle group-hover:scale-110 transition-transform">
+                  <div className="w-12 h-12 rounded-xl bg-zinc-800/50 flex items-center justify-center border border-zinc-800 group-hover:scale-110 transition-transform shadow-sm">
                     {getIcon(material.type)}
                   </div>
-                  <span className="text-xs font-semibold text-text-tertiary bg-surface-inset px-2 py-1 rounded-md">
+                  <span className="text-xs font-semibold text-zinc-500 bg-zinc-900 px-2 py-1 rounded-md">
                     {new Date(material.created_at).toLocaleDateString()}
                   </span>
                 </div>
                 
                 <div className="flex-1">
-                  <h3 className="text-lg font-bold text-text-primary mb-2 group-hover:text-accent-glow transition-colors line-clamp-1">{material.title}</h3>
-                  <p className="text-sm text-text-secondary line-clamp-2">{material.description}</p>
+                  <h3 className="text-lg font-semibold text-white mb-2 group-hover:text-amethyst transition-colors line-clamp-1">{material.title}</h3>
+                  <p className="text-sm text-zinc-400 line-clamp-2">{material.description}</p>
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-border-subtle flex justify-between items-center">
-                  <span className="text-xs font-bold uppercase tracking-wider text-text-tertiary">{material.type}</span>
-                  <button className="flex items-center gap-2 text-sm font-bold text-text-primary hover:text-accent-glow transition-colors bg-surface-inset px-4 py-2 rounded-lg">
+                <div className="mt-6 pt-4 border-t border-zinc-800/60 flex justify-between items-center">
+                  <span className="text-xs font-bold uppercase tracking-wider text-zinc-500">{material.type}</span>
+                  <button className="flex items-center gap-2 text-sm font-medium text-white hover:text-[#a855f7] transition-colors bg-zinc-800/50 px-4 py-2 rounded-lg">
                     {material.type === 'link' ? <><ExternalLink size={16} /> Open</> : <><Download size={16} /> Download</>}
                   </button>
                 </div>
