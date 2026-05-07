@@ -1,0 +1,28 @@
+-- 25 Students
+INSERT INTO public.students (name, usn, branch_code) VALUES
+('Aarav Patel', '4SH24CS001', 'CS'),
+('Vivaan Sharma', '4SH24CS002', 'CS'),
+('Aditya Kumar', '4SH24CS003', 'AI'),
+('Vihaan Singh', '4SH24CS004', 'IS'),
+('Arjun Gupta', '4SH24CS005', 'CS'),
+('Sai Reddy', '4SH24CS006', 'AI'),
+('Ananya Joshi', '4SH24CS007', 'CS'),
+('Diya Nair', '4SH24CS008', 'IS'),
+('Isha Desai', '4SH24CS009', 'AI'),
+('Aadya Mehta', '4SH24CS010', 'CS'),
+('Nisha Rao', '4SH24CS011', 'CS'),
+('Rohan Kapoor', '4SH24CS012', 'AI'),
+('Kabir Verma', '4SH24CS013', 'IS'),
+('Shaurya Bhat', '4SH24CS014', 'CS'),
+('Riya Menon', '4SH24CS015', 'AI'),
+('Meera Iyer', '4SH24CS016', 'CS'),
+('Krish Pillai', '4SH24CS017', 'IS'),
+('Aryan Choudhury', '4SH24CS018', 'AI'),
+('Neha Jain', '4SH24CS019', 'CS'),
+('Kavya Das', '4SH24CS020', 'IS'),
+('Ishaan Thakur', '4SH24CS021', 'CS'),
+('Dhruv Saini', '4SH24CS022', 'AI'),
+('Sanya Agarwal', '4SH24CS023', 'IS'),
+('Kiara Arora', '4SH24CS024', 'CS'),
+('Priya Chatterjee', '4SH24CS025', 'AI')
+ON CONFLICT (usn) DO NOTHING;

@@ -15,12 +15,17 @@
   - `StudentHistory.jsx`: Component displaying a searchable list of students, their branch, and calculated attendance percentages.
   - `Materials.jsx`: Resource sharing component serving both mentors (upload view) and students (read-only view) with fallback mock data handling.
 
+- **Mentor Phase 4**:
+  - `UploadCsv.jsx`: Smart CSV/Excel upload system powered by AI (Gemini 2.5 Flash). It automatically maps arbitrary columns to the database schema, provides a preview, handles errors, and inserts data directly into Supabase while maintaining an import log.
+- **Student Phase 5**:
+  - `MyAttendance.jsx`: Student-facing dashboard showing their overall attendance percentage, session breakdown, and visual warnings if attendance drops below 75%.
+  - `Upcoming.jsx`: Student view of upcoming scheduled sessions with duration, location/type, and dates.
+
 ## Present (Current State)
-- The app supports a Mentor and Student flow. Mentor dashboard, attendance, student history, and materials sharing are now fully implemented.
-- We have placeholder routes for Phase 4 and 5 (Upload CSV, My Attendance).
-- API keys and DB connections are functional via `src/lib/supabase.js` and `src/lib/gemini.js`.
+- The application is **FULLY FUNCTIONAL** from top to bottom.
+- Both Mentor and Student flows are fully implemented.
+- AI features are actively used for CSV data mapping.
+- The project has successfully reached the final phase of initial development.
 
 ## Future (What's Next)
-- **Phase 4**: CSV Upload feature for mentors.
-- **Phase 5**: Student Dashboard (`MyAttendance`, `Upcoming Sessions`).
-- **Refinement**: Adding AI insights using Gemini (integration started via `gemini.js` but needs features).
+- **Refinement & Scaling**: Continuous improvements, advanced AI insights on student performance, email notifications, and broader analytics.

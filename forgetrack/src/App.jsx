@@ -11,11 +11,10 @@ import Attendance from './pages/mentor/AttendanceMarking';
 import History from './pages/mentor/StudentHistory';
 import Materials from './pages/mentor/Materials';
 
-// Mock empty pages to satisfy remaining routes
-const UploadCsv = () => <div className="text-fg-primary">CSV Upload (Phase 4)</div>;
+import UploadCsv from './pages/mentor/UploadCsv';
 
-const MyAttendance = () => <div className="text-fg-primary">My Attendance (Phase 5)</div>;
-const Upcoming = () => <div className="text-fg-primary">Upcoming Sessions (Phase 5)</div>;
+import MyAttendance from './pages/student/MyAttendance';
+import Upcoming from './pages/student/Upcoming';
 
 const RootRedirect = () => {
   const role = localStorage.getItem('role');
@@ -30,7 +29,7 @@ function App() {
       <Route path="/login" element={<Login />} />
       <Route path="/403" element={<Forbidden />} />
       <Route path="/dev-tokens" element={<DevTokens />} />
-      
+
       <Route path="/" element={<RootRedirect />} />
 
       {/* Mentor Routes */}
