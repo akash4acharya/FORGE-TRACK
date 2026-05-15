@@ -246,78 +246,56 @@ export default function Dashboard() {
               </tr>
             </thead>
             <tbody className="divide-y divide-white/5">
-              {sessions.slice(0, 5).map((session, i) => (
-                <tr key={session.id || i} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-4 px-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-darkbase border border-white/10 flex items-center justify-center text-xs font-bold text-white overflow-hidden">
-                        <img src={`https://ui-avatars.com/api/?name=Student+${i + 1}&background=random`} alt="Student" />
+              {sessions.length === 0 ? (
+                <tr>
+                  <td colSpan="5" className="py-16 text-center">
+                    <div className="flex flex-col items-center justify-center">
+                      <div className="w-16 h-16 bg-zinc-800/50 rounded-full flex items-center justify-center mb-4 border border-zinc-700/50">
+                        <BookOpen size={32} className="text-zinc-600" />
                       </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">Student {i + 1}</p>
-                        <p className="text-gray-500 text-xs">student{i + 1}@forge.local</p>
-                      </div>
+                      <h3 className="text-xl font-bold text-white mb-2">No Sessions Yet</h3>
+                      <p className="text-zinc-500 text-sm max-w-md mx-auto mb-6">Your dashboard is empty because there is no student or session data. Let's get started by uploading your records.</p>
+                      <button onClick={() => navigate('/upload')} className="bg-gradient-to-r from-[#a855f7] to-[#c084fc] hover:opacity-90 text-white font-semibold py-2.5 px-6 rounded-md transition-all shadow-sm">
+                        Go to Upload Agent
+                      </button>
                     </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    <p className="text-gray-300 text-sm font-medium">{session.topic || 'General Check-in'}</p>
-                    <p className="text-gray-500 text-xs">{session.session_type}</p>
-                  </td>
-                  <td className="py-4 px-6">
-                    <div className="flex items-center gap-1.5 text-gray-400 text-sm">
-                      <Clock size={14} />
-                      {new Date(session.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
-                    </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    {i % 3 === 0 ? (
-                      <span className="px-2.5 py-1 bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 rounded-md text-xs font-medium">Success</span>
-                    ) : i % 3 === 1 ? (
-                      <span className="px-2.5 py-1 bg-yellow-400/10 text-yellow-400 border border-yellow-400/20 rounded-md text-xs font-medium">Processing</span>
-                    ) : (
-                      <span className="px-2.5 py-1 bg-red-400/10 text-red-400 border border-red-400/20 rounded-md text-xs font-medium">Declined</span>
-                    )}
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <button onClick={() => alert(`Managing session for Student ${i + 1}`)} className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
-                      <MoreHorizontal size={18} />
-                    </button>
                   </td>
                 </tr>
-              ))}
-              {sessions.length === 0 && [1, 2, 3].map(i => (
-                 <tr key={i} className="hover:bg-white/[0.02] transition-colors">
-                  <td className="py-4 px-6">
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-full bg-darkbase border border-white/10 flex items-center justify-center text-xs font-bold text-white overflow-hidden">
-                        <img src={`https://ui-avatars.com/api/?name=Student+${i}&background=random`} alt="Student" />
+              ) : (
+                sessions.slice(0, 5).map((session, i) => (
+                  <tr key={session.id || i} className="hover:bg-white/[0.02] transition-colors">
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-darkbase border border-white/10 flex items-center justify-center text-xs font-bold text-white overflow-hidden">
+                          <img src={`https://ui-avatars.com/api/?name=Student+${i + 1}&background=random`} alt="Student" />
+                        </div>
+                        <div>
+                          <p className="text-white text-sm font-medium">Student {i + 1}</p>
+                          <p className="text-gray-500 text-xs">student{i + 1}@forge.local</p>
+                        </div>
                       </div>
-                      <div>
-                        <p className="text-white text-sm font-medium">Student {i}</p>
-                        <p className="text-gray-500 text-xs">student{i}@forge.local</p>
+                    </td>
+                    <td className="py-4 px-6">
+                      <p className="text-gray-300 text-sm font-medium">{session.topic || 'General Check-in'}</p>
+                      <p className="text-gray-500 text-xs">{session.session_type}</p>
+                    </td>
+                    <td className="py-4 px-6">
+                      <div className="flex items-center gap-1.5 text-gray-400 text-sm">
+                        <Clock size={14} />
+                        {new Date(session.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
                       </div>
-                    </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    <p className="text-gray-300 text-sm font-medium">Orientation Session</p>
-                    <p className="text-gray-500 text-xs">Offline</p>
-                  </td>
-                  <td className="py-4 px-6">
-                    <div className="flex items-center gap-1.5 text-gray-400 text-sm">
-                      <Clock size={14} />
-                      Oct {10 + i}, 2023
-                    </div>
-                  </td>
-                  <td className="py-4 px-6">
-                    <span className="px-2.5 py-1 bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 rounded-md text-xs font-medium">Success</span>
-                  </td>
-                  <td className="py-4 px-6 text-right">
-                    <button onClick={() => alert(`Managing session for Student ${i}`)} className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
-                      <MoreHorizontal size={18} />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    </td>
+                    <td className="py-4 px-6">
+                      <span className="px-2.5 py-1 bg-emerald-400/10 text-emerald-400 border border-emerald-400/20 rounded-md text-xs font-medium">Recorded</span>
+                    </td>
+                    <td className="py-4 px-6 text-right">
+                      <button onClick={() => alert(`Managing session ${session.id}`)} className="text-gray-400 hover:text-white transition-colors p-1 rounded hover:bg-white/5">
+                        <MoreHorizontal size={18} />
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              )}
             </tbody>
           </table>
         </div>

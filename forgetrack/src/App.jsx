@@ -15,6 +15,7 @@ import UploadCsv from './pages/mentor/UploadCsv';
 
 import MyAttendance from './pages/student/MyAttendance';
 import Upcoming from './pages/student/Upcoming';
+import { Toaster } from 'react-hot-toast';
 
 const RootRedirect = () => {
   const role = localStorage.getItem('role');
@@ -25,25 +26,37 @@ const RootRedirect = () => {
 
 function App() {
   return (
-    <Routes>
-      <Route path="/login" element={<Login />} />
-      <Route path="/403" element={<Forbidden />} />
-      <Route path="/dev-tokens" element={<DevTokens />} />
+    <>
+      <Toaster 
+        position="top-right" 
+        toastOptions={{
+          style: {
+            background: '#151517',
+            color: '#fff',
+            border: '1px solid #27272a',
+          },
+        }} 
+      />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+        <Route path="/403" element={<Forbidden />} />
+        <Route path="/dev-tokens" element={<DevTokens />} />
 
-      <Route path="/" element={<RootRedirect />} />
+        <Route path="/" element={<RootRedirect />} />
 
-      {/* Mentor Routes */}
-      <Route path="/dashboard" element={<RoleGuard allowedRoles={['mentor']}><Shell><Dashboard /></Shell></RoleGuard>} />
-      <Route path="/attendance" element={<RoleGuard allowedRoles={['mentor']}><Shell><Attendance /></Shell></RoleGuard>} />
-      <Route path="/history" element={<RoleGuard allowedRoles={['mentor']}><Shell><History /></Shell></RoleGuard>} />
-      <Route path="/materials" element={<RoleGuard allowedRoles={['mentor']}><Shell><Materials /></Shell></RoleGuard>} />
-      <Route path="/upload" element={<RoleGuard allowedRoles={['mentor']}><Shell><UploadCsv /></Shell></RoleGuard>} />
+        {/* Mentor Routes */}
+        <Route path="/dashboard" element={<RoleGuard allowedRoles={['mentor']}><Shell><Dashboard /></Shell></RoleGuard>} />
+        <Route path="/attendance" element={<RoleGuard allowedRoles={['mentor']}><Shell><Attendance /></Shell></RoleGuard>} />
+        <Route path="/history" element={<RoleGuard allowedRoles={['mentor']}><Shell><History /></Shell></RoleGuard>} />
+        <Route path="/materials" element={<RoleGuard allowedRoles={['mentor']}><Shell><Materials /></Shell></RoleGuard>} />
+        <Route path="/upload" element={<RoleGuard allowedRoles={['mentor']}><Shell><UploadCsv /></Shell></RoleGuard>} />
 
-      {/* Student Routes */}
-      <Route path="/me/attendance" element={<RoleGuard allowedRoles={['student']}><Shell><MyAttendance /></Shell></RoleGuard>} />
-      <Route path="/me/upcoming" element={<RoleGuard allowedRoles={['student']}><Shell><Upcoming /></Shell></RoleGuard>} />
-      <Route path="/me/materials" element={<RoleGuard allowedRoles={['student']}><Shell><Materials /></Shell></RoleGuard>} />
-    </Routes>
+        {/* Student Routes */}
+        <Route path="/me/attendance" element={<RoleGuard allowedRoles={['student']}><Shell><MyAttendance /></Shell></RoleGuard>} />
+        <Route path="/me/upcoming" element={<RoleGuard allowedRoles={['student']}><Shell><Upcoming /></Shell></RoleGuard>} />
+        <Route path="/me/materials" element={<RoleGuard allowedRoles={['student']}><Shell><Materials /></Shell></RoleGuard>} />
+      </Routes>
+    </>
   );
 }
 

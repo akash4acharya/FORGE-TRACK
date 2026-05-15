@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { FileText, Download, ExternalLink, Plus, Search } from 'lucide-react';
+import { FileText, Download, ExternalLink, Plus, Search, BookOpen } from 'lucide-react';
 
 export default function Materials() {
   const [materials, setMaterials] = useState([]);
@@ -19,12 +19,7 @@ export default function Materials() {
       if (!error && data && data.length > 0) {
         setMaterials(data);
       } else {
-        // Fallback Mock Data
-        setMaterials([
-          { id: 1, title: 'React Fundamentals', description: 'Core concepts of React hooks and components.', type: 'pdf', created_at: new Date().toISOString() },
-          { id: 2, title: 'Tailwind CSS Cheatsheet', description: 'Quick reference for utility classes.', type: 'link', created_at: new Date(Date.now() - 86400000).toISOString() },
-          { id: 3, title: 'Supabase Auth Guide', description: 'Setting up authentication with React.', type: 'document', created_at: new Date(Date.now() - 172800000).toISOString() },
-        ]);
+        setMaterials([]);
       }
       setLoading(false);
     }
@@ -84,10 +79,23 @@ export default function Materials() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-6">
-          {filteredMaterials.length === 0 ? (
+          {materials.length === 0 ? (
+             <div className="col-span-full p-16 text-center flex flex-col items-center justify-center">
+              <div className="w-20 h-20 bg-zinc-800/50 rounded-full flex items-center justify-center mb-6">
+                <BookOpen size={40} className="text-zinc-600" />
+              </div>
+              <h2 className="text-2xl font-bold text-white mb-2">No Materials Found</h2>
+              <p className="text-zinc-500 max-w-md mx-auto mb-8">There are no learning materials uploaded yet. Mentors can upload PDFs and links to share with students.</p>
+              {role === 'mentor' && (
+                <button className="bg-gradient-to-r from-[#a855f7] to-[#c084fc] hover:opacity-90 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg shadow-amethyst/20">
+                  Upload Material
+                </button>
+              )}
+            </div>
+          ) : filteredMaterials.length === 0 ? (
              <div className="col-span-full p-12 text-center">
               <div className="text-gray-600 mb-2 flex justify-center"><Search size={32} /></div>
-              <div className="text-gray-400 font-medium text-sm">No materials found.</div>
+              <div className="text-gray-400 font-medium text-sm">No materials match your search.</div>
             </div>
           ) : (
             filteredMaterials.map((material, i) => (

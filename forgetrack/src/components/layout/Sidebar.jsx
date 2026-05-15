@@ -1,13 +1,20 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import { LayoutDashboard, CheckSquare, Users, BookOpen, Upload, UserCheck, Calendar, LogOut, Settings, Moon, Sun } from 'lucide-react';
-
+import { supabase } from '../../lib/supabase';
+import { toast } from 'react-hot-toast';
 export function Sidebar({ role }) {
   const navigate = useNavigate();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await supabase.auth.signOut();
     localStorage.removeItem('role');
+    localStorage.removeItem('usn');
     navigate('/login');
+  };
+
+  const handleFeatureComingSoon = () => {
+    toast('Feature coming soon', { icon: '🚀' });
   };
 
   const navClass = ({ isActive }) => 
@@ -100,7 +107,7 @@ export function Sidebar({ role }) {
           </div>
         </div>
 
-        <button className="w-full bg-amethyst hover:bg-amethyst-hover text-white text-sm font-semibold py-2.5 rounded-md transition-colors">
+        <button onClick={handleFeatureComingSoon} className="w-full bg-amethyst hover:bg-amethyst-hover text-white text-sm font-semibold py-2.5 rounded-md transition-colors">
           Upgrade Now
         </button>
 
@@ -109,7 +116,7 @@ export function Sidebar({ role }) {
             <LogOut size={18} />
             <span className="text-sm font-medium">Logout</span>
           </button>
-          <button className="hover:text-white transition-colors">
+          <button onClick={handleFeatureComingSoon} className="hover:text-white transition-colors">
             <Settings size={18} />
           </button>
         </div>

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Search, ChevronRight, User } from 'lucide-react';
+import { Search, ChevronRight, Users } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 export default function StudentHistory() {
   const [students, setStudents] = useState([]);
   const [search, setSearch] = useState('');
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function fetchStudents() {
@@ -46,6 +48,18 @@ export default function StudentHistory() {
         </div>
       </div>
 
+      {students.length === 0 ? (
+        <div className="bg-[#151517] border border-zinc-800 rounded-xl p-16 flex flex-col items-center justify-center text-center shadow-sm mt-8">
+          <div className="w-20 h-20 bg-zinc-800/50 rounded-full flex items-center justify-center mb-6">
+            <Users size={40} className="text-zinc-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-2">No Students Found</h2>
+          <p className="text-zinc-500 max-w-md mx-auto mb-8">The database is completely empty. Please use the AI CSV Upload feature to import your student roster.</p>
+          <button onClick={() => navigate('/upload')} className="bg-gradient-to-r from-[#a855f7] to-[#c084fc] hover:opacity-90 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg shadow-amethyst/20">
+            Upload Data
+          </button>
+        </div>
+      ) : (
       <div className="bg-[#151517] border border-zinc-800 rounded-xl overflow-hidden shadow-sm">
         <div className="p-6 border-b border-zinc-800 flex flex-col sm:flex-row gap-5 items-center justify-between">
           <div className="relative w-full sm:max-w-md group">
@@ -124,6 +138,7 @@ export default function StudentHistory() {
           </table>
         </div>
       </div>
+      )}
     </div>
   );
 }

@@ -1,0 +1,435 @@
+{
+  "timestamp": "2026-05-07T10:37:15.579Z",
+  "data": {
+    "students": [
+      {
+        "id": 51,
+        "name": "Aarav Patel",
+        "usn": "4SH24CS001",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 52,
+        "name": "Vivaan Sharma",
+        "usn": "4SH24CS002",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 53,
+        "name": "Aditya Kumar",
+        "usn": "4SH24CS003",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 54,
+        "name": "Vihaan Singh",
+        "usn": "4SH24CS004",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 55,
+        "name": "Arjun Gupta",
+        "usn": "4SH24CS005",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 56,
+        "name": "Sai Reddy",
+        "usn": "4SH24CS006",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 57,
+        "name": "Ananya Joshi",
+        "usn": "4SH24CS007",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 58,
+        "name": "Diya Nair",
+        "usn": "4SH24CS008",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 59,
+        "name": "Isha Desai",
+        "usn": "4SH24CS009",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 60,
+        "name": "Aadya Mehta",
+        "usn": "4SH24CS010",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 61,
+        "name": "Nisha Rao",
+        "usn": "4SH24CS011",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 62,
+        "name": "Rohan Kapoor",
+        "usn": "4SH24CS012",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 63,
+        "name": "Kabir Verma",
+        "usn": "4SH24CS013",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 64,
+        "name": "Shaurya Bhat",
+        "usn": "4SH24CS014",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 65,
+        "name": "Riya Menon",
+        "usn": "4SH24CS015",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 66,
+        "name": "Meera Iyer",
+        "usn": "4SH24CS016",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 67,
+        "name": "Krish Pillai",
+        "usn": "4SH24CS017",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 68,
+        "name": "Aryan Choudhury",
+        "usn": "4SH24CS018",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 69,
+        "name": "Neha Jain",
+        "usn": "4SH24CS019",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 70,
+        "name": "Kavya Das",
+        "usn": "4SH24CS020",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 71,
+        "name": "Ishaan Thakur",
+        "usn": "4SH24CS021",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 72,
+        "name": "Dhruv Saini",
+        "usn": "4SH24CS022",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 73,
+        "name": "Sanya Agarwal",
+        "usn": "4SH24CS023",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "IS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 74,
+        "name": "Kiara Arora",
+        "usn": "4SH24CS024",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "CS",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 75,
+        "name": "Priya Chatterjee",
+        "usn": "4SH24CS025",
+        "admission_number": null,
+        "email": null,
+        "branch_code": "AI",
+        "batch": "2024-2028",
+        "is_active": true,
+        "created_at": "2026-04-30T10:20:37.831057"
+      }
+    ],
+    "sessions": [
+      {
+        "id": 31,
+        "date": "2025-08-05",
+        "topic": "8-Layer AI Stack",
+        "month_number": 4,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 32,
+        "date": "2025-08-12",
+        "topic": "ReAct Agent Pattern",
+        "month_number": 4,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 33,
+        "date": "2025-08-19",
+        "topic": "Vector Embeddings",
+        "month_number": 4,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 34,
+        "date": "2025-08-26",
+        "topic": "pgvector RAG",
+        "month_number": 4,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 35,
+        "date": "2025-09-02",
+        "topic": "Tiered Autonomy Multi-Agent",
+        "month_number": 4,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 36,
+        "date": "2025-09-09",
+        "topic": "LLM Function Calling",
+        "month_number": 5,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 37,
+        "date": "2025-09-16",
+        "topic": "Fine-tuning Foundations",
+        "month_number": 5,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 38,
+        "date": "2025-09-23",
+        "topic": "LoRA and QLoRA",
+        "month_number": 5,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 39,
+        "date": "2025-09-30",
+        "topic": "Evaluation Metrics for AI",
+        "month_number": 5,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 40,
+        "date": "2025-10-07",
+        "topic": "Deploying on Edge",
+        "month_number": 5,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 41,
+        "date": "2025-10-14",
+        "topic": "ONNX Runtime",
+        "month_number": 6,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 42,
+        "date": "2025-10-21",
+        "topic": "Vision Models Introduction",
+        "month_number": 6,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 43,
+        "date": "2025-10-28",
+        "topic": "Multimodal Agents",
+        "month_number": 6,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 44,
+        "date": "2025-11-04",
+        "topic": "Reinforcement Learning Basics",
+        "month_number": 6,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      },
+      {
+        "id": 45,
+        "date": "2025-11-11",
+        "topic": "Future of AI Architecture",
+        "month_number": 6,
+        "duration_hours": 2,
+        "session_type": "offline",
+        "notes": null,
+        "created_at": "2026-04-30T10:20:37.831057"
+      }
+    ],
+    "attendance": []
+  }
+}

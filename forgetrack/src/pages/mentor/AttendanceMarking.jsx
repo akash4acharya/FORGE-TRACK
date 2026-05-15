@@ -1,22 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../../lib/supabase';
-import { Check, X, Search, Filter, ChevronDown, ChevronUp } from 'lucide-react';
-
-const themeMap = {
-  cyan: { bg: 'bg-cyan-500', text: 'text-cyan-400', border: 'border-cyan-400', shadow: 'shadow-[0_0_15px_rgba(6,182,212,0.5)]', rowBg: 'bg-cyan-950/20' },
-  fuchsia: { bg: 'bg-fuchsia-500', text: 'text-fuchsia-400', border: 'border-fuchsia-400', shadow: 'shadow-[0_0_15px_rgba(217,70,239,0.5)]', rowBg: 'bg-fuchsia-950/20' },
-  amber: { bg: 'bg-amber-500', text: 'text-amber-400', border: 'border-amber-400', shadow: 'shadow-[0_0_15px_rgba(245,158,11,0.5)]', rowBg: 'bg-amber-950/20' },
-  indigo: { bg: 'bg-indigo-500', text: 'text-indigo-400', border: 'border-indigo-400', shadow: 'shadow-[0_0_15px_rgba(99,102,241,0.5)]', rowBg: 'bg-indigo-950/20' },
-  emerald: { bg: 'bg-emerald-500', text: 'text-emerald-400', border: 'border-emerald-400', shadow: 'shadow-[0_0_15px_rgba(16,185,129,0.5)]', rowBg: 'bg-emerald-950/20' }
-};
+import { Check, X, Search, Filter, Users } from 'lucide-react';
+import { toast } from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
 
 export default function AttendanceMarking() {
   const [students, setStudents] = useState([]);
   const [sessions, setSessions] = useState([]);
   const [selectedSession, setSelectedSession] = useState('');
   const [search, setSearch] = useState('');
-  const [attendance, setAttendance] = useState({});
-  const [expandedStudentId, setExpandedStudentId] = useState(null);
+  const [attendanceMap, setAttendanceMap] = useState({});
+  const [isSaving, setIsSaving] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     async function loadData() {
@@ -27,50 +22,67 @@ export default function AttendanceMarking() {
 
       if (studentRes.data) setStudents(studentRes.data);
       if (sessionRes.data) {
-        const themesKeys = Object.keys(themeMap);
-        const themedSessions = sessionRes.data.map((s, i) => ({
-          ...s,
-          theme: themesKeys[i % themesKeys.length]
-        }));
-        setSessions(themedSessions);
-        if (themedSessions.length > 0) setSelectedSession(themedSessions[0].id.toString());
+        setSessions(sessionRes.data);
+        if (sessionRes.data.length > 0) setSelectedSession(sessionRes.data[0].id.toString());
       }
     }
     loadData();
   }, []);
 
-  const filteredStudents = students.filter(s => 
-    s.name.toLowerCase().includes(search.toLowerCase()) || 
+  useEffect(() => {
+    async function loadAttendance() {
+      if (!selectedSession) return;
+      const { data } = await supabase.from('attendance').select('student_id, present').eq('session_id', selectedSession);
+      if (data) {
+        const map = {};
+        data.forEach(r => map[r.student_id] = r.present);
+        setAttendanceMap(map);
+      }
+    }
+    loadAttendance();
+  }, [selectedSession]);
+
+  const handleSave = async () => {
+    if (!selectedSession) return;
+    setIsSaving(true);
+    const inserts = Object.keys(attendanceMap).map(studentId => ({
+      session_id: selectedSession,
+      student_id: studentId,
+      present: attendanceMap[studentId],
+      marked_by: 'manual'
+    }));
+
+    if (inserts.length > 0) {
+      const { error } = await supabase.from('attendance').upsert(inserts, { onConflict: 'student_id,session_id' });
+      if (error) {
+        toast.error('Failed to save attendance');
+      } else {
+        toast.success('Attendance saved successfully!', { icon: '✅' });
+      }
+    } else {
+      toast('No changes to save.');
+    }
+    setIsSaving(false);
+  };
+
+  const filteredStudents = students.filter(s =>
+    s.name.toLowerCase().includes(search.toLowerCase()) ||
     s.usn.toLowerCase().includes(search.toLowerCase())
   );
 
-  const toggleAttendance = (studentId, status) => {
-    setAttendance(prev => ({
-      ...prev,
-      [studentId]: prev[studentId] === status ? null : status
-    }));
-  };
-
-  const markedCount = Object.values(attendance).filter(status => status !== null).length;
-  const totalStudents = students.length;
-  const progressPercentage = totalStudents > 0 ? (markedCount / totalStudents) * 100 : 0;
-
-  const activeSession = sessions.find(s => s.id.toString() === selectedSession) || sessions[0];
-  const activeTheme = activeSession ? themeMap[activeSession.theme] : themeMap.emerald;
-
   return (
-    <div className="animate-fade-in space-y-6">
+    <div className="animate-fade-in space-y-8">
       <div className="flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
         <div>
-          <h1 className="text-xl font-bold text-white mb-1">Mark Attendance</h1>
-          <p className="text-gray-400 font-medium text-sm">Select a session and record student presence manually.</p>
+          <h1 className="text-3xl font-bold text-text-primary mb-2">Mark Attendance</h1>
+          <p className="text-text-secondary font-medium">Select a session and record student presence manually.</p>
         </div>
 
         <div className="flex items-center gap-3 w-full md:w-auto">
           <div className="relative flex-1 md:w-72">
-            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
-            <select 
-              className={`w-full bg-[#0a0a0b] border border-zinc-800 rounded-md py-2 pl-10 pr-4 text-sm font-medium focus:outline-none focus:border-amethyst transition-colors appearance-none ${activeTheme?.text || 'text-white'}`}
+            <Filter className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={16} />
+            <select
+              className="input pl-10 border-none bg-surface-raised font-semibold"
               value={selectedSession}
               onChange={(e) => setSelectedSession(e.target.value)}
             >
@@ -79,124 +91,87 @@ export default function AttendanceMarking() {
               ))}
             </select>
           </div>
-          <button className="bg-amethyst hover:bg-[#c084fc] text-white px-6 py-2 rounded-md text-sm font-semibold transition-colors shadow-sm whitespace-nowrap">
-            Save Changes
+          <button onClick={handleSave} disabled={isSaving} className="btn-primary whitespace-nowrap px-6 disabled:opacity-50 transition-opacity">
+            {isSaving ? 'Saving...' : 'Save Changes'}
           </button>
         </div>
       </div>
 
-      <div className="bg-[#151517] border border-zinc-800 rounded-xl overflow-hidden shadow-sm">
-        <div className="p-6 border-b border-zinc-800 flex flex-col sm:flex-row gap-5 items-center justify-between">
+      {students.length === 0 ? (
+        <div className="card border-none shadow-xl p-16 flex flex-col items-center justify-center text-center bg-darkbase border border-zinc-800">
+          <div className="w-20 h-20 bg-zinc-800/50 rounded-full flex items-center justify-center mb-6">
+            <Users size={40} className="text-zinc-600" />
+          </div>
+          <h2 className="text-2xl font-bold text-white mb-2">No Students Found</h2>
+          <p className="text-zinc-500 max-w-md mx-auto mb-8">Your database is completely empty. You need to upload your student roster and attendance history before you can mark new sessions.</p>
+          <button onClick={() => navigate('/upload')} className="bg-gradient-to-r from-[#a855f7] to-[#c084fc] hover:opacity-90 text-white font-semibold py-3 px-8 rounded-full transition-all shadow-lg shadow-amethyst/20">
+            Go to CSV Upload
+          </button>
+        </div>
+      ) : (
+
+      <div className="card p-0 overflow-hidden border-none shadow-2xl">
+        <div className="p-6 border-b border-border-subtle bg-surface/40 backdrop-blur-md flex flex-col sm:flex-row gap-5 items-center justify-between">
           <div className="relative w-full sm:max-w-md">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
-            <input 
-              type="text" 
-              placeholder="Search students by name or USN..." 
-              className="w-full bg-[#0a0a0b] border border-zinc-800 focus:border-amethyst rounded-md py-2 pl-10 pr-4 text-sm text-white placeholder-gray-500 transition-colors outline-none"
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-tertiary" size={18} />
+            <input
+              type="text"
+              placeholder="Search students by name or USN..."
+              className="input pl-11 bg-surface-inset border-border-subtle focus:bg-surface transition-all"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
             />
           </div>
-          <div className="bg-[#0a0a0b] border border-zinc-800 text-zinc-300 rounded-full px-4 py-1 text-sm font-medium">
+          <div className="px-4 py-2 bg-surface-raised rounded-xl border border-border-subtle text-sm font-bold text-text-primary">
             {filteredStudents.length} Students Listed
           </div>
         </div>
 
-        <div className="px-6 py-4 border-b border-zinc-800 bg-[#151517] sticky top-0 z-10">
-          <div className="flex justify-between items-center mb-2">
-            <span className="text-xs font-semibold text-zinc-400 uppercase tracking-wider">Session Completion</span>
-            <span className="text-xs font-bold text-white">{Math.round(progressPercentage)}%</span>
-          </div>
-          <div className="bg-zinc-800 h-2 rounded-full overflow-hidden">
-            <div 
-              className={`h-full ${activeTheme?.bg || 'bg-emerald-500'} transition-all duration-500 ease-out`}
-              style={{ width: `${progressPercentage}%` }}
-            />
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 divide-y divide-zinc-800 max-h-[600px] overflow-y-auto custom-scrollbar">
+        <div className="grid grid-cols-1 divide-y divide-border-subtle max-h-[600px] overflow-y-auto">
           {filteredStudents.length === 0 ? (
             <div className="p-20 text-center">
-              <div className="text-gray-600 mb-2 flex justify-center"><Search size={32} /></div>
-              <div className="text-gray-400 font-medium text-sm">No students match your search</div>
+              <div className="text-text-tertiary mb-2"><Search size={48} className="mx-auto opacity-20" /></div>
+              <div className="text-text-secondary font-medium text-lg">No students match your search</div>
             </div>
           ) : (
-            filteredStudents.map((student, i) => {
-              const status = attendance[student.id];
-              return (
-                <div 
-                  key={student.id} 
-                  className={`flex flex-col p-4 px-6 transition-colors duration-300 relative ${
-                    status === 'present' ? (activeTheme?.rowBg || 'bg-emerald-950/20') : 
-                    status === 'absent' ? 'bg-rose-950/20' : 
-                    'hover:bg-white/[0.02]'
-                  }`}
-                >
-                  {status === 'present' && <div className={`absolute left-0 top-0 bottom-0 w-1 ${activeTheme?.bg || 'bg-emerald-500'}`} />}
-                  {status === 'absent' && <div className="absolute left-0 top-0 bottom-0 w-1 bg-rose-500" />}
-                  
-                  <div className="flex items-center justify-between w-full">
-                    <div 
-                      className="flex items-center gap-4 cursor-pointer flex-1 group"
-                      onClick={() => setExpandedStudentId(expandedStudentId === student.id ? null : student.id)}
-                    >
-                      <div className="w-10 h-10 rounded-full bg-[#27272a] text-white font-medium border border-zinc-700 flex items-center justify-center text-sm shadow-sm group-hover:bg-[#3f3f46] transition-colors">
-                        {student.name.charAt(0)}
-                      </div>
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <p className={`text-sm font-semibold transition-colors duration-300 ${status === 'absent' ? 'text-zinc-400' : 'text-white'}`}>{student.name}</p>
-                          {expandedStudentId === student.id ? <ChevronUp size={14} className="text-zinc-500" /> : <ChevronDown size={14} className="text-zinc-500 opacity-0 group-hover:opacity-100 transition-opacity" />}
-                        </div>
-                        <div className="flex gap-2 items-center mt-1">
-                          <span className="bg-[#0a0a0b] border border-zinc-800 text-zinc-400 text-xs px-2 py-0.5 rounded-md font-mono">{student.usn}</span>
-                          <span className="text-xs font-medium text-zinc-500">{student.branch_code}</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3">
-                    <button 
-                      onClick={() => toggleAttendance(student.id, 'present')}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-200 ease-out active:scale-90 ${
-                        status === 'present' 
-                          ? `${activeTheme?.bg || 'bg-emerald-500'} ${activeTheme?.border || 'border-emerald-400'} text-white ${activeTheme?.shadow || 'shadow-[0_0_15px_rgba(16,185,129,0.5)]'}` 
-                          : 'bg-[#151517] border-zinc-700 text-zinc-500 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-300'
-                      }`}
-                      title="Mark Present"
-                    >
-                      <Check size={18} strokeWidth={status === 'present' ? 3 : 2} />
-                    </button>
-                    <button 
-                      onClick={() => toggleAttendance(student.id, 'absent')}
-                      className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-200 ease-out active:scale-90 ${
-                        status === 'absent' 
-                          ? 'bg-rose-500 border-rose-400 text-white shadow-[0_0_15px_rgba(244,63,94,0.5)]' 
-                          : 'bg-[#151517] border-zinc-700 text-zinc-500 hover:-translate-y-0.5 hover:border-zinc-500 hover:text-zinc-300'
-                      }`}
-                      title="Mark Absent"
-                    >
-                      <X size={18} strokeWidth={status === 'absent' ? 3 : 2} />
-                    </button>
+            filteredStudents.map((student, i) => (
+              <div key={student.id} className="flex items-center justify-between p-6 hover:bg-surface-raised/40 transition-all group animate-fade-in" style={{ animationDelay: `${i * 20}ms` }}>
+                <div className="flex items-center gap-5">
+                  <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-surface-raised to-surface border border-border-subtle flex items-center justify-center font-bold text-accent-glow text-xl shadow-lg group-hover:scale-110 transition-transform">
+                    {student.name.charAt(0)}
                   </div>
-                  </div>
-
-                  {expandedStudentId === student.id && (
-                    <div className="mt-4 p-4 bg-[#0a0a0b] rounded-lg border border-zinc-800 animate-fade-in text-sm text-zinc-400 grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-6 ml-14">
-                      <div><span className="font-medium text-zinc-500 block mb-1">Email</span> <span className="text-zinc-300">{student.email || 'Not provided'}</span></div>
-                      <div><span className="font-medium text-zinc-500 block mb-1">Admission Number</span> <span className="text-zinc-300">{student.admission_number || 'Not provided'}</span></div>
-                      <div><span className="font-medium text-zinc-500 block mb-1">Batch</span> <span className="text-zinc-300">{student.batch || '2024-2028'}</span></div>
-                      <div><span className="font-medium text-zinc-500 block mb-1">Status</span> <span className={student.is_active !== false ? "text-emerald-400" : "text-rose-400"}>{student.is_active !== false ? 'Active' : 'Inactive'}</span></div>
-                      <div><span className="font-medium text-zinc-500 block mb-1">Enrolled</span> <span className="text-zinc-300">{student.created_at ? new Date(student.created_at).toLocaleDateString() : 'N/A'}</span></div>
+                  <div>
+                    <p className="text-lg font-bold text-text-primary group-hover:text-accent-glow transition-colors">{student.name}</p>
+                    <div className="flex gap-3 items-center mt-1.5">
+                      <span className="text-xs font-bold font-mono text-text-tertiary bg-surface-inset px-2.5 py-1 rounded-lg border border-border-subtle">{student.usn}</span>
+                      <span className="w-1.5 h-1.5 rounded-full bg-border-strong opacity-30"></span>
+                      <span className="text-sm text-text-secondary font-semibold">{student.branch_code}</span>
                     </div>
-                  )}
+                  </div>
                 </div>
-              );
-            })
+
+                <div className="flex gap-4">
+                  <button 
+                    onClick={() => setAttendanceMap(prev => ({ ...prev, [student.id]: true }))}
+                    className={`w-12 h-12 rounded-2xl border-2 flex items-center justify-center transition-all shadow-lg active:scale-90 ${attendanceMap[student.id] === true ? 'border-success-fg bg-success-fg text-white' : 'border-success-border bg-success-bg text-success-fg hover:bg-success-fg hover:text-white'}`} 
+                    title="Mark Present"
+                  >
+                    <Check size={22} strokeWidth={3} />
+                  </button>
+                  <button 
+                    onClick={() => setAttendanceMap(prev => ({ ...prev, [student.id]: false }))}
+                    className={`w-12 h-12 rounded-2xl border-2 flex items-center justify-center transition-all shadow-lg active:scale-90 ${attendanceMap[student.id] === false ? 'border-danger-fg bg-danger-fg text-white' : 'border-danger-border bg-danger-bg text-danger-fg hover:bg-danger-fg hover:text-white'}`} 
+                    title="Mark Absent"
+                  >
+                    <X size={22} strokeWidth={3} />
+                  </button>
+                </div>
+              </div>
+            ))
           )}
         </div>
       </div>
+      )}
     </div>
   );
 }

@@ -26,12 +26,8 @@ export default function Upcoming() {
         console.error("Fetch failed", e);
       }
 
-      // Fallback Mock Data
-      setSessions([
-        { id: 1, topic: 'Advanced React Patterns', date: new Date(Date.now() + 86400000).toISOString(), session_type: 'online', duration_hours: 2 },
-        { id: 2, topic: 'Next.js & Server Components', date: new Date(Date.now() + 259200000).toISOString(), session_type: 'offline', duration_hours: 3 },
-        { id: 3, topic: 'Project Showcase', date: new Date(Date.now() + 604800000).toISOString(), session_type: 'offline', duration_hours: 4 },
-      ]);
+      // Fallback Mock Data if empty
+      setSessions([]);
       setLoading(false);
     }
     fetchSessions();
@@ -50,10 +46,12 @@ export default function Upcoming() {
 
       <div className="grid gap-6">
         {sessions.length === 0 ? (
-          <div className="bg-darkbase border border-zinc-800 rounded-xl p-12 text-center shadow-sm">
-            <Calendar className="mx-auto text-zinc-700 mb-4" size={48} />
-            <h3 className="text-white font-bold text-lg mb-1">No upcoming sessions</h3>
-            <p className="text-zinc-500 text-sm">Your mentor hasn't scheduled any new sessions yet.</p>
+          <div className="bg-[#151517] border border-zinc-800 rounded-xl p-16 text-center shadow-sm flex flex-col items-center justify-center">
+            <div className="w-20 h-20 bg-zinc-800/50 rounded-full flex items-center justify-center mb-6 border border-zinc-700/50">
+              <Calendar className="text-zinc-600" size={40} />
+            </div>
+            <h3 className="text-2xl font-bold text-white mb-2">No upcoming sessions</h3>
+            <p className="text-zinc-500 text-sm max-w-md">Your mentor hasn't scheduled any new sessions yet. When they use the AI upload agent to import the roster, your upcoming classes will appear here.</p>
           </div>
         ) : (
           sessions.map((session, i) => {

@@ -1,0 +1,281 @@
+{
+  "timestamp": "2026-05-07T11:42:03.643Z",
+  "students": [
+    {
+      "id": 51,
+      "name": "Aarav Patel",
+      "usn": "4SH24CS001",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 52,
+      "name": "Vivaan Sharma",
+      "usn": "4SH24CS002",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 53,
+      "name": "Aditya Kumar",
+      "usn": "4SH24CS003",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 54,
+      "name": "Vihaan Singh",
+      "usn": "4SH24CS004",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 55,
+      "name": "Arjun Gupta",
+      "usn": "4SH24CS005",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 56,
+      "name": "Sai Reddy",
+      "usn": "4SH24CS006",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 57,
+      "name": "Ananya Joshi",
+      "usn": "4SH24CS007",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 58,
+      "name": "Diya Nair",
+      "usn": "4SH24CS008",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 59,
+      "name": "Isha Desai",
+      "usn": "4SH24CS009",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 60,
+      "name": "Aadya Mehta",
+      "usn": "4SH24CS010",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 61,
+      "name": "Nisha Rao",
+      "usn": "4SH24CS011",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 62,
+      "name": "Rohan Kapoor",
+      "usn": "4SH24CS012",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 63,
+      "name": "Kabir Verma",
+      "usn": "4SH24CS013",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 64,
+      "name": "Shaurya Bhat",
+      "usn": "4SH24CS014",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 65,
+      "name": "Riya Menon",
+      "usn": "4SH24CS015",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 66,
+      "name": "Meera Iyer",
+      "usn": "4SH24CS016",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 67,
+      "name": "Krish Pillai",
+      "usn": "4SH24CS017",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 68,
+      "name": "Aryan Choudhury",
+      "usn": "4SH24CS018",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 69,
+      "name": "Neha Jain",
+      "usn": "4SH24CS019",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 70,
+      "name": "Kavya Das",
+      "usn": "4SH24CS020",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 71,
+      "name": "Ishaan Thakur",
+      "usn": "4SH24CS021",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 72,
+      "name": "Dhruv Saini",
+      "usn": "4SH24CS022",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 73,
+      "name": "Sanya Agarwal",
+      "usn": "4SH24CS023",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "IS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 74,
+      "name": "Kiara Arora",
+      "usn": "4SH24CS024",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "CS",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    },
+    {
+      "id": 75,
+      "name": "Priya Chatterjee",
+      "usn": "4SH24CS025",
+      "admission_number": null,
+      "email": null,
+      "branch_code": "AI",
+      "batch": "2024-2028",
+      "is_active": true,
+      "created_at": "2026-04-30T10:20:37.831057"
+    }
+  ],
+  "attendance": []
+}
